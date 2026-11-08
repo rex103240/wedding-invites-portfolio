@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Niyota Invites — Digital Wedding Invitations</title>
+  <meta name="description" content="Bespoke digital wedding invitations and interactive celebration suites by Niyota Invites.">
+
+  <!-- Google Fonts: Editorial Wedding Aesthetic (Cormorant Garamond + Plus Jakarta Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-body: #faf9f6;
+      --bg-card: #ffffff;
+      --border-light: #eae6df;
+      --border-dark: #1c1917;
+      --text-dark: #1f1d1b;
+      --text-muted: #6e6a64;
+      --text-subtle: #99948c;
+      --accent-warm: #8c7355;
+      --accent-soft: #f4f1ea;
+      --radius-card: 16px;
+      --radius-pill: 100px;
+      --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 44px 18px 80px 18px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Header & Instagram Profile */
+    .profile-header {
+      text-align: center;
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .profile-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--accent-warm);
+      margin-bottom: 12px;
+    }
+
+    .brand-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 34px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      line-height: 1.15;
+    }
+
+    .brand-bio {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 380px;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    /* Instagram & Social Bar */
+    .social-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .ig-pill, .wp-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      color: var(--text-dark);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .ig-pill:hover {
+      border-color: #d62976;
+      color: #d62976;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(214, 41, 118, 0.12);
+    }
+
+    .wp-pill:hover {
+      border-color: #25d366;
+      color: #128c7e;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.15);
+    }
+
+    .ig-pill svg, .wp-pill svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border-light);
+      margin: 22px 0 16px 0;
+    }
+
+    /* Category Filter */
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      max-width: 100%;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+    }
+
+    .filter-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border-light);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--text-dark);
+      color: var(--text-dark);
+    }
+
+    .filter-btn.active {
+      background: var(--text-dark);
+      border-color: var(--text-dark);
+      color: #ffffff;
+    }
+
+    /* Links Stack */
+    .links-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .invite-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-card);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--shadow-subtle);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+    }
+
+    .invite-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: #d1cbc2;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-theme-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .action-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-body);
+      border: 1px solid var(--border-light);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .action-icon:hover {
+      background: var(--text-dark);
+      color: #ffffff;
+      border-color: var(--text-dark);
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.25;
+    }
+
+    .card-description {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+      padding-top: 8px;
+      border-top: 1px solid var(--accent-soft);
+    }
+
+    .card-link-preview {
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+
+    .card-view-btn {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dark);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.2s ease;
+    }
+
+    .invite-card:hover .card-view-btn {
+      gap: 7px;
+    }
+
+    /* Instagram & Inquiry Section */
+    .inquiry-card {
+      margin-top: 36px;
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      text-align: center;
+      box-shadow: var(--shadow-subtle);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .inquiry-card h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .inquiry-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 360px;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .inquiry-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--text-dark);
+      color: #ffffff;
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .primary-btn:hover {
+      background: #383431;
+      transform: translateY(-1px);
+    }
+
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      color: var(--text-dark);
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .secondary-btn:hover {
+      border-color: #d62976;
+      color: #d62976;
+    }
+
+    /* Modal for Quick Preview */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 14, 13, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-sheet {
+      background: #ffffff;
+      border-radius: 18px;
+      width: 100%;
+      max-width: 440px;
+      height: 86vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-top {
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .modal-btns {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-btn {
+      background: var(--bg-body);
+      border: 1px solid var(--border-light);
+      color: var(--text-dark);
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: inherit;
+    }
+
+    .modal-btn:hover {
+      background: var(--text-dark);
+      color: #ffffff;
+    }
+
+    .modal-btn.close {
+      width: 26px;
+      height: 26px;
+      padding: 0;
+      justify-content: center;
+    }
+
+    .modal-iframe {
+      width: 100%;
+      flex: 1;
+      border: none;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      background: var(--text-dark);
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 2000;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--text-subtle);
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 30px 14px 60px 14px;
+      }
+      .brand-title {
+        font-size: 28px;
+      }
+      .invite-card {
+        padding: 16px;
+      }
+      .modal-sheet {
+        height: 92vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Profile & Brand Header -->
+    <header class="profile-header">
+      <div class="profile-badge">Wedding Invitation Studio</div>
+      <h1 class="brand-title">Niyota Invites</h1>
+      <p class="brand-bio">Handcrafted digital wedding invitations, interactive celebration suites, and bespoke stories.</p>
+
+      <!-- Social & Contact Bar -->
+      <div class="social-bar">
+        <a href="https://www.instagram.com/niyota.inivites/" target="_blank" rel="noopener noreferrer" class="ig-pill" title="Follow Niyota Invites on Instagram">
+          <!-- Instagram SVG Icon -->
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+          <span>@niyota.inivites</span>
+        </a>
+        <a href="https://wa.me/917976944626?text=Hello%20Niyota%20Invites!%20I%20would%20like%20to%20inquire%20about%20a%20digital%20wedding%20invitation." target="_blank" rel="noopener noreferrer" class="wp-pill" title="Chat on WhatsApp">
+          <!-- WhatsApp SVG Icon -->
+          <svg viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.654-.697c.969.529 1.748.818 2.806.818 3.181 0 5.767-2.587 5.767-5.766.001-3.182-2.585-5.77-5.767-5.77zm3.377 8.21c-.144.405-.837.774-1.17.824-.312.045-.694.06-2.124-.531-1.701-.703-2.775-2.457-2.859-2.571-.084-.114-.688-.916-.688-1.747 0-.83.434-1.239.589-1.408.156-.169.34-.212.453-.212.113 0 .227.001.326.006.104.005.244-.039.382.293.144.346.492 1.2.535 1.288.043.088.071.191.014.305-.057.114-.085.185-.17.284-.085.099-.179.221-.256.297-.085.085-.174.177-.075.347.099.17.44 1.266 1.343 1.716.48.24 1.002.325 1.157.34.155.015.246-.015.345-.128.099-.113.424-.495.538-.665.113-.17.227-.142.382-.085.156.057.99.467 1.16.552.17.085.283.128.326.199.043.071.043.411-.101.816z"/>
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.662 1.435 5.179L2 22l4.957-1.399C8.423 21.493 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.273c-1.636 0-3.155-.49-4.428-1.332l-.317-.21-2.946.83.844-2.87-.229-.333C4.015 15.017 3.5 13.561 3.5 12c0-4.687 3.813-8.5 8.5-8.5s8.5 3.813 8.5 8.5-3.813 8.5-8.5 8.5z"/>
+          </svg>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Filter Categories -->
+      <nav class="filter-pills" aria-label="Collections">
+        <button class="filter-btn active" data-filter="all">All Invitations (5)</button>
+        <button class="filter-btn" data-filter="traditional">Traditional &amp; Devotional</button>
+        <button class="filter-btn" data-filter="royal">Royal Heritage</button>
+        <button class="filter-btn" data-filter="modern">Modern Luxury</button>
+      </nav>
+    </header>
+
+    <!-- Cards Stack -->
+    <main class="links-stack" id="cardsContainer">
+
+      <!-- Card 1: Aarav & Ananya -->
+      <article class="invite-card" data-category="traditional" onclick="handleCardClick(event, 'https://aarav-weds-ananya-black.vercel.app/')">
+        <div class="card-header">
+          <span class="card-theme-tag">Radha Krishna Collection</span>
+          <div class="card-actions">
+            <button class="action-icon" title="Quick Preview" onclick="openPreview(event, 'https://aarav-weds-ananya-black.vercel.app/', 'Aarav &amp; Ananya')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+            <button class="action-icon" title="Copy Link" onclick="copyCardLink(event, 'https://aarav-weds-ananya-black.vercel.app/')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="card-title-row">
+          <h2 class="card-title">Aarav &amp; Ananya</h2>
+        </div>
+        <p class="card-description">Spiritual Radha Krishna theme featuring devotional blessings, sacred flute, and traditional cultural aesthetic.</p>
+
+        <div class="card-footer">
+          <span class="card-link-preview">aarav-weds-ananya-black.vercel.app</span>
+          <span class="card-view-btn">
+            View Invitation
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+          </span>
+        </div>
+      </article>
+
+      <!-- Card 2: Virinch & Nidhi -->
+      <article class="invite-card" data-category="modern" onclick="handleCardClick(event, 'https://virinch-weds-nidhi.vercel.app/')">
+        <div class="card-header">
+          <span class="card-theme-tag">Floral Celebration Suite</span>
+          <div class="card-actions">
+            <button class="action-icon" title="Quick Preview" onclick="openPreview(event, 'https://virinch-weds-nidhi.vercel.app/', 'Virinch &amp; Nidhi')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+            <button class="action-icon" title="Copy Link" onclick="copyCardLink(event, 'https://virinch-weds-nidhi.vercel.app/')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="card-title-row">
+          <h2 class="card-title">Virinch &amp; Nidhi</h2>
+        </div>
+        <p class="card-description">Delicate floral aesthetic paired with background music, interactive animations, itinerary, and guest RSVP.</p>
+
+        <div class="card-footer">
+          <span class="card-link-preview">virinch-weds-nidhi.vercel.app</span>
+          <span class="card-view-btn">
+            View Invitation
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+          </span>
+        </div>
+      </article>
+
+      <!-- Card 3: Rajputi Wedding Invite -->
+      <article class="invite-card" data-category="royal" onclick="handleCardClick(event, 'https://rajputi-wedding-invite.vercel.app/')">
+        <div class="card-header">
+          <span class="card-theme-tag">Rajputana Heritage</span>
+          <div class="card-actions">
+            <button class="action-icon" title="Quick Preview" onclick="openPreview(event, 'https://rajputi-wedding-invite.vercel.app/', 'Rajputi Wedding Invite')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+            <button class="action-icon" title="Copy Link" onclick="copyCardLink(event, 'https://rajputi-wedding-invite.vercel.app/')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="card-title-row">
+          <h2 class="card-title">राजपूती विवाह निमंत्रण पत्र</h2>
+        </div>
+        <p class="card-description">Classic royal Rajasthan style with authentic jaali borders, traditional scripts, and heritage grandeur.</p>
+
+        <div class="card-footer">
+          <span class="card-link-preview">rajputi-wedding-invite.vercel.app</span>
+          <span class="card-view-btn">
+            View Invitation
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+          </span>
+        </div>
+      </article>
+
+      <!-- Card 4: Aarav & Meher -->
+      <article class="invite-card" data-category="royal" onclick="handleCardClick(event, 'https://aravanmeher01.vercel.app/')">
+        <div class="card-header">
+          <span class="card-theme-tag">Jaipur Grand Palace</span>
+          <div class="card-actions">
+            <button class="action-icon" title="Quick Preview" onclick="openPreview(event, 'https://aravanmeher01.vercel.app/', 'Aarav &amp; Meher')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+            <button class="action-icon" title="Copy Link" onclick="copyCardLink(event, 'https://aravanmeher01.vercel.app/')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="card-title-row">
+          <h2 class="card-title">Aarav &amp; Meher</h2>
+        </div>
+        <p class="card-description">Palatial mandap celebration edition showcasing Jaipur architecture, arches, and royal celebration details.</p>
+
+        <div class="card-footer">
+          <span class="card-link-preview">aravanmeher01.vercel.app</span>
+          <span class="card-view-btn">
+            View Invitation
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+          </span>
+        </div>
+      </article>
+
+      <!-- Card 5: Shaadi Luxe -->
+      <article class="invite-card" data-category="modern" onclick="handleCardClick(event, 'https://shaadi-luxe.vercel.app/')">
+        <div class="card-header">
+          <span class="card-theme-tag">Signature Luxe Edition</span>
+          <div class="card-actions">
+            <button class="action-icon" title="Quick Preview" onclick="openPreview(event, 'https://shaadi-luxe.vercel.app/', 'Shaadi Luxe')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+            <button class="action-icon" title="Copy Link" onclick="copyCardLink(event, 'https://shaadi-luxe.vercel.app/')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="card-title-row">
+          <h2 class="card-title">Arjun &amp; Ananya — Shaadi Luxe</h2>
+        </div>
+        <p class="card-description">Ultra-premium crimson velvet &amp; gold edition with cinematic audio and seamless page transitions.</p>
+
+        <div class="card-footer">
+          <span class="card-link-preview">shaadi-luxe.vercel.app</span>
+          <span class="card-view-btn">
+            View Invitation
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+          </span>
+        </div>
+      </article>
+
+    </main>
+
+    <!-- Bottom Connect & Inquiry Section -->
+    <section class="inquiry-card">
+      <h3>Design Your Wedding Invitation</h3>
+      <p>Connect with Niyota Invites to craft an extraordinary digital card tailored to your wedding theme.</p>
+      <div class="inquiry-actions">
+        <a href="https://www.instagram.com/niyota.inivites/" target="_blank" rel="noopener noreferrer" class="secondary-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+          DM on Instagram
+        </a>
+        <a href="https://wa.me/917976944626?text=Hello%20Niyota%20Invites!%20I%20would%20like%20to%20inquire%20about%20a%20digital%20wedding%20invitation." target="_blank" rel="noopener noreferrer" class="primary-btn">
+          Chat on WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 Niyota Invites &bull; <a href="https://www.instagram.com/niyota.inivites/" target="_blank" rel="noopener noreferrer">@niyota.inivites</a></p>
+    </footer>
+
+  </div>
+
+  <!-- Live In-Page Preview Dialog -->
+  <div class="modal-overlay" id="previewModal" onclick="closeModalOnBackdrop(event)">
+    <div class="modal-sheet">
+      <div class="modal-top">
+        <span class="modal-title" id="modalTitle">Invitation Preview</span>
+        <div class="modal-btns">
+          <a href="#" target="_blank" id="modalOpenExternal" class="modal-btn">
+            Open Tab ↗
+          </a>
+          <button class="modal-btn close" onclick="closePreview()" title="Close">✕</button>
+        </div>
+      </div>
+      <iframe id="previewIframe" class="modal-iframe" src="" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <span id="toastText">Link copied to clipboard</span>
+  </div>
+
+  <script>
+    function handleCardClick(event, url) {
+      if (event.target.closest('.action-icon')) {
+        return;
+      }
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    const modal = document.getElementById('previewModal');
+    const iframe = document.getElementById('previewIframe');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalOpenExternal = document.getElementById('modalOpenExternal');
+
+    function openPreview(event, url, title) {
+      event.stopPropagation();
+      modalTitle.textContent = title;
+      modalOpenExternal.href = url;
+      iframe.src = url;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePreview() {
+      modal.classList.remove('active');
+      iframe.src = '';
+      document.body.style.overflow = '';
+    }
+
+    function closeModalOnBackdrop(e) {
+      if (e.target === modal) {
+        closePreview();
+      }
+    }
+
+    async function copyCardLink(event, url) {
+      event.stopPropagation();
+      try {
+        await navigator.clipboard.writeText(url);
+        showToast("Link copied to clipboard");
+      } catch (err) {
+        const temp = document.createElement("input");
+        temp.value = url;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        showToast("Link copied to clipboard");
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toastText');
+      toastText.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2400);
+    }
+
+    // Filter Chips
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.invite-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closePreview();
+      }
+    });
+  </script>
+</body>
+</html>
