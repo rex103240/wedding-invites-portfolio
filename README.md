@@ -6,13 +6,11 @@ Bespoke digital wedding invitations, interactive celebration suites, and royal t
 
 1. **Aarav & Ananya** — [Live Preview](https://aarav-weds-ananya-black.vercel.app/)
    - Theme: Radha Krishna Traditional & Devotional Collection
-2. **Virinch & Nidhi** — [Live Preview](https://virinch-weds-nidhi.vercel.app/)
-   - Theme: Modern Floral Celebration Suite with interactive music & RSVP
-3. **शुभ विवाह निमंत्रण पत्र** — [Live Preview](https://rajputi-wedding-invite.vercel.app/)
+2. **शुभ विवाह निमंत्रण पत्र** — [Live Preview](https://rajputi-wedding-invite.vercel.app/)
    - Theme: Rajputana Royal Heritage & Classic Jaali Architecture
-4. **Aarav & Meher** — [Live Preview](https://aravanmeher01.vercel.app/)
+3. **Aarav & Meher** — [Live Preview](https://aravanmeher01.vercel.app/)
    - Theme: Jaipur Grand Palace Mandap Edition
-5. **Arjun & Ananya** — [Live Preview](https://shaadi-luxe.vercel.app/)
+4. **Arjun & Ananya** — [Live Preview](https://shaadi-luxe.vercel.app/)
    - Theme: Shaadi Luxe Velvet Crimson & Gold Edition
 
 ## Connect & Inquire
